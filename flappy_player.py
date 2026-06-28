@@ -10,7 +10,7 @@ class Flappy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = (s.width-700,s.height-600))
         self.index = 0.0
         self.animation_speed = 0.1
-        self.gravity = 2
+        self.gravity = 4
         self.jump_height = 80
         
     def load_images(self):
@@ -30,7 +30,7 @@ class Flappy(pygame.sprite.Sprite):
 
     def jump(self):
         self.rect.y -= self.jump_height
-
+        
     def update(self):
         if s.playing == True:
             self.animate_flappy()

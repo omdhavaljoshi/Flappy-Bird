@@ -5,6 +5,7 @@ import settings as s
 import game_logic as gl
 import screen_logic as sl
 import flappy_player as fp
+import obstacle as o
 
 s.screen = pygame.display.set_mode((s.width,s.height))
 s.bg = pygame.image.load(s.background_img)
@@ -16,6 +17,7 @@ s.quit_btn_img = pygame.image.load(s.quit_img)
 s.quit_btn_img = pygame.transform.scale(s.quit_btn_img,(200,60))
 s.flappy = fp.Flappy()
 s.player_group.add(s.flappy)
+pygame.time.set_timer(s.spawn_obstacle,1500)
 
 while s.running:
     s.clock.tick(s.fps)
@@ -35,6 +37,8 @@ while s.running:
             print(s.playing)
             sl.set_screen_logic(mouse_pos)
             print(s.playing)
+        if event.type == s.spawn_obstacle and s.playing == True:
+            s.obstacle_group.add(o.Obstacle())
 
     if s.playing == True:
         gl.move_on_play()
@@ -54,4 +58,5 @@ while s.running:
         s.is_jumping = False
         
     s.player_group.update()
+    s.obstacle_group.update()
     pygame.display.update()

@@ -1,6 +1,7 @@
 # Imports -->
 import pygame
 import os
+import obstacle as o
 
 dir = os.path.dirname(__file__)
 height,width = 900,800
@@ -20,7 +21,9 @@ GAME_SCREEN = "game screen"
 PAUSE_SCREEN = "pause screen"
 current_screen = GAME_SCREEN
 player_group = pygame.sprite.Group()
+obstacle_group = pygame.sprite.Group()
 flappy = None
+obstacle = o.Obstacle()
 is_jumping = False
 game_over = False
 bg_colour = (100,224,117)
@@ -31,3 +34,4 @@ quit_img = os.path.join(dir,r"Images/quit.png")
 resume_btn_img = None
 quit_btn_img = None
 font = pygame.font.Font(None,40)
+spawn_obstacle = pygame.USEREVENT + 1

@@ -11,6 +11,7 @@ def draw_game_screen():
     s.screen.blit(s.bg,(0,0))
     s.screen.blit(s.ground,(s.ground_x,s.ground_y))
     s.player_group.draw(s.screen)
+    s.obstacle_group.draw(s.screen)
 
 def draw_puase_screen():
     s.screen.fill(s.bg_colour)
