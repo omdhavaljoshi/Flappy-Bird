@@ -6,15 +6,12 @@ import game_logic as gl
 import screen_logic as sl
 import flappy_player as fp
 import obstacle as o
+import random
 
 s.screen = pygame.display.set_mode((s.width,s.height))
 s.bg = pygame.image.load(s.background_img)
 s.bg = pygame.transform.scale(s.bg,(s.width,s.height))
 s.ground = pygame.image.load(s.ground_img)
-s.resume_btn_img = pygame.image.load(s.resume_img)
-s.resume_btn_img = pygame.transform.scale(s.resume_btn_img,(200,60))
-s.quit_btn_img = pygame.image.load(s.quit_img)
-s.quit_btn_img = pygame.transform.scale(s.quit_btn_img,(200,60))
 s.flappy = fp.Flappy()
 s.player_group.add(s.flappy)
 pygame.time.set_timer(s.spawn_obstacle,1500)
@@ -38,7 +35,12 @@ while s.running:
             sl.set_screen_logic(mouse_pos)
             print(s.playing)
         if event.type == s.spawn_obstacle and s.playing == True:
-            s.obstacle_group.add(o.Obstacle())
+            bottom_height = random.randint(300,450)
+            top_height = s.height-bottom_height-s.gap_height
+            s.top_pipe = o.Obstacle(top_height,True)
+            s.bottom_pipe = o.Obstacle(bottom_height,False)
+            s.obstacle_group.add(s.top_pipe)
+            s.obstacle_group.add(s.bottom_pipe)
 
     if s.playing == True:
         gl.move_on_play()
@@ -48,11 +50,17 @@ while s.running:
 
     if s.current_screen == s.PAUSE_SCREEN:
         sl.draw_puase_screen()
-        print(s.playing)
+
+    if s.current_screen == s.GAME_OVER_SCREEN:
+        sl.draw_game_over_screen()
+
+    if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask):
+        s.playing = False
+        s.current_screen = s.GAME_OVER_SCREEN
 
     if s.flappy.rect.y >= 700:
         s.playing = False
-        s.game_over = True
+        s.current_screen = s.GAME_OVER_SCREEN
 
     if s.flappy.rect.y <= 50:
         s.is_jumping = False

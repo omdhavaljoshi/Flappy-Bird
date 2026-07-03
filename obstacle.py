@@ -1,14 +1,18 @@
 import pygame
-import random
 import settings as s
 
 class Obstacle(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,height,top):
         super().__init__()
-        self.height = random.randint(300,450)
-        self.image = pygame.image.load(s.dir+r"/Images/pipe.png")
-        self.image = pygame.transform.scale(self.image,(80,self.height))
-        self.rect = self.image.get_rect(bottomleft = (750,750))
+        self.height = height
+        self.top = top
+        self.original_image = pygame.image.load(s.dir+r"/Images/pipe.png")
+        self.image = pygame.transform.scale(self.original_image,(80,self.height))
+        if self.top == True:
+            self.image = pygame.transform.flip(self.image,False,True)
+            self.rect = self.image.get_rect(topleft = (750,0))
+        else:
+            self.rect = self.image.get_rect(bottomleft = (750,750))
 
     def move_left(self):
         if s.playing == True:

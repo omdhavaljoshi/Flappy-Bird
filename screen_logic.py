@@ -3,10 +3,7 @@ import settings as s
 
 def draw_button(rectButton,color):
     pygame.draw.rect(s.screen,color,rectButton)
-    # label = s.font.render(text,True,"White")
-    # coordinates = label.get_rect(center = rectButton.center)
-    # s.screen.blit(label,coordinates)
-
+    
 def draw_game_screen():
     s.screen.blit(s.bg,(0,0))
     s.screen.blit(s.ground,(s.ground_x,s.ground_y))
@@ -21,6 +18,9 @@ def draw_puase_screen():
     s.screen.blit(s.quit_btn_img,(300,400))
     title = s.font.render("Game Paused", True, "Black")
     s.screen.blit(title, (300,250))
+
+def draw_game_over_screen():
+    s.screen.fill(s.bg_colour)
 
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
