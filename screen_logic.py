@@ -23,7 +23,8 @@ def draw_puase_screen():
 
 def draw_game_over_screen():
     s.screen.fill(s.bg_colour)
-
+    
+    
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
         if s.resume_button.collidepoint(mousePos):

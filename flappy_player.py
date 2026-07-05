@@ -10,7 +10,7 @@ class Flappy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = (s.width-400,s.height-600))
         self.index = 0
         self.gravity = 0.5
-        self.jump_height = -60
+        self.jump_height = -30
         self.velocity = 0
         self.count = 0
         self.angle = 20
