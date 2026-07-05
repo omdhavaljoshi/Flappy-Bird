@@ -41,3 +41,7 @@ gap_height = 350
 top_pipe = None
 bottom_pipe = None
 score = 0
+jump_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_wing.wav"))
+point_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_point.wav"))
+hit_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_hit.wav"))
+die_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_die.wav"))

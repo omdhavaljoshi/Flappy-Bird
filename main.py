@@ -54,12 +54,16 @@ while s.running:
     if s.current_screen == s.GAME_OVER_SCREEN:
         sl.draw_game_over_screen()
 
-    if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask):
+    if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask) and s.playing == True:
         s.playing = False
+        s.hit_sound.play()
+        s.die_sound.play()
         s.current_screen = s.GAME_OVER_SCREEN
 
-    if s.flappy.rect.y >= 700:
+    if s.flappy.rect.y >= 700 and s.playing == True:
         s.playing = False
+        s.hit_sound.play()
+        s.die_sound.play()
         s.current_screen = s.GAME_OVER_SCREEN
 
     if s.flappy.rect.y <= 50:

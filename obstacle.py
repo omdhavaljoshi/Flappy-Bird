@@ -20,6 +20,7 @@ class Obstacle(pygame.sprite.Sprite):
             if self.rect.right < 0:
                 self.kill()
                 s.score += 1
+                s.point_sound.play()
 
     def update(self):
         self.move_left()
