@@ -40,3 +40,4 @@ spawn_obstacle = pygame.USEREVENT + 1
 gap_height = 350
 top_pipe = None
 bottom_pipe = None
+score = 0

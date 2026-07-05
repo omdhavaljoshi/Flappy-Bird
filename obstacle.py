@@ -19,6 +19,7 @@ class Obstacle(pygame.sprite.Sprite):
             self.rect.x -= s.scroll_speed
             if self.rect.right < 0:
                 self.kill()
+                s.score += 1
 
     def update(self):
         self.move_left()

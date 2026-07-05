@@ -9,6 +9,8 @@ def draw_game_screen():
     s.screen.blit(s.ground,(s.ground_x,s.ground_y))
     s.player_group.draw(s.screen)
     s.obstacle_group.draw(s.screen)
+    score = s.font.render(f"Score: {s.score//2}", True, "black")
+    s.screen.blit(score, (0,0))
 
 def draw_puase_screen():
     s.screen.fill(s.bg_colour)
