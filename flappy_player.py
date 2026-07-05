@@ -7,7 +7,7 @@ class Flappy(pygame.sprite.Sprite):
         self.bird_images = []
         self.load_images()
         self.image = self.bird_images[0]
-        self.rect = self.image.get_rect(center = (s.width-700,s.height-600))
+        self.rect = self.image.get_rect(center = (s.width-400,s.height-600))
         self.index = 0
         self.gravity = 0.5
         self.jump_height = -60

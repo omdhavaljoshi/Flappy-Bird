@@ -16,10 +16,10 @@ def draw_puase_screen():
     s.screen.fill(s.bg_colour)
     draw_button(s.resume_button,"black")
     draw_button(s.quit_button,"black")
-    s.screen.blit(s.resume_btn_img,(300,300))
-    s.screen.blit(s.quit_btn_img,(300,400))
+    s.screen.blit(s.resume_btn_img,(s.width-350,s.height-600))
+    s.screen.blit(s.quit_btn_img,(s.width-350,s.height-500))
     title = s.font.render("Game Paused", True, "Black")
-    s.screen.blit(title, (300,250))
+    s.screen.blit(title, (s.width-350,s.height-700))
 
 def draw_game_over_screen():
     s.screen.fill(s.bg_colour)

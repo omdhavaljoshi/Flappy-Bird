@@ -4,7 +4,7 @@ import os
 import obstacle as o
 
 dir = os.path.dirname(__file__)
-height,width = 900,800
+height,width = 900,500
 fps = 60
 clock = pygame.time.Clock()
 screen = None
@@ -27,8 +27,8 @@ flappy = None
 is_jumping = False
 game_over = False
 bg_colour = (100,224,117)
-resume_button = pygame.Rect(300,300,200,60)
-quit_button = pygame.Rect(300,400,200,60)
+resume_button = pygame.Rect(width-350,height-600,200,60)
+quit_button = pygame.Rect(width-350,height-500,200,60)
 resume_img = os.path.join(dir,r"Images/resume.png")
 quit_img = os.path.join(dir,r"Images/quit.png")
 resume_btn_img = pygame.image.load(resume_img)
