@@ -9,8 +9,8 @@ def draw_game_screen():
     s.screen.blit(s.ground,(s.ground_x,s.ground_y))
     s.player_group.draw(s.screen)
     s.obstacle_group.draw(s.screen)
-    score = s.font.render(f"Score: {s.score//2}", True, "black")
-    s.screen.blit(score, (0,0))
+    score = s.font.render(f"{s.score//2}", False,(0,0,0))
+    s.screen.blit(score, (s.width-250,s.height-750))
 
 def draw_puase_screen():
     s.screen.fill(s.bg_colour)
@@ -19,7 +19,7 @@ def draw_puase_screen():
     s.screen.blit(s.resume_btn_img,(s.width-350,s.height-600))
     s.screen.blit(s.quit_btn_img,(s.width-350,s.height-500))
     title = s.font.render("Game Paused", True, "Black")
-    s.screen.blit(title, (s.width-350,s.height-700))
+    s.screen.blit(title, (s.width-400,s.height-700))
 
 def draw_game_over_screen():
     s.screen.fill(s.bg_colour)

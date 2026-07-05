@@ -60,7 +60,7 @@ while s.running:
 
     if s.flappy.rect.y >= 700:
         s.playing = False
-        # s.current_screen = s.GAME_OVER_SCREEN
+        s.current_screen = s.GAME_OVER_SCREEN
 
     if s.flappy.rect.y <= 50:
         s.is_jumping = False
