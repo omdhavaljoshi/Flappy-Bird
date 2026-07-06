@@ -39,7 +39,7 @@ def draw_game_over_screen():
         s.screen.blit(new_score,(s.width-450,s.height-280))
     if s.score == s.high_score and s.new_high_score == False:
         so_close = s.font.render("So Close!",False,(59, 67, 227))
-        s.screen.blit(so_close,(s.width-390,s.height-280))
+        s.screen.blit(so_close,(s.width-370,s.height-280))
     s.screen.blit(score,(s.width-430,s.height-380))
     s.screen.blit(high_score,(s.width-430,s.height-330))
     
