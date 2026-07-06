@@ -46,6 +46,12 @@ class Flappy(pygame.sprite.Sprite):
         self.rect.y += self.jump_height
         self.velocity = -10
         s.jump_sound.play()
+
+    def reset(self):
+        s.flappy.rect.x = s.width-400
+        s.flappy.rect.y = s.height-600
+        self.angle = 0
+        self.velocity = 0
         
     def update(self):
         if s.playing == True:

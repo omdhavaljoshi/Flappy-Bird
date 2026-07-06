@@ -27,21 +27,33 @@ flappy = None
 is_jumping = False
 game_over = False
 bg_colour = (100,224,117)
+
+# buttons ->
 resume_button = pygame.Rect(width-350,height-600,200,60)
 quit_button = pygame.Rect(width-350,height-500,200,60)
+restart_button = pygame.Rect(width-350,height-600,200,60)
+# images ->
 resume_img = os.path.join(dir,r"Images/resume.png")
 quit_img = os.path.join(dir,r"Images/quit.png")
+restart_img = os.path.join(dir,r"Images/restart.png")
+# button images ->
 resume_btn_img = pygame.image.load(resume_img)
 resume_btn_img = pygame.transform.scale(resume_btn_img,(200,60))
 quit_btn_img = pygame.image.load(quit_img)
 quit_btn_img = pygame.transform.scale(quit_btn_img,(200,60))
+restart_btn_img = pygame.image.load(restart_img)
+restart_btn_img = pygame.transform.scale(restart_btn_img,(200,60))
+
 font = pygame.font.Font(os.path.join(dir,r"flappy-font.ttf"),50)
 spawn_obstacle = pygame.USEREVENT + 1
 gap_height = 350
 top_pipe = None
 bottom_pipe = None
 score = 0
+high_score = 0
 jump_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_wing.wav"))
 point_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_point.wav"))
 hit_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_hit.wav"))
 die_sound = pygame.mixer.Sound(os.path.join(dir,r"sfx_die.wav"))
+score_board = pygame.Rect(width-450,height-400,400,180)
+new_high_score = False

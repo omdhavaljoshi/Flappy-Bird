@@ -19,7 +19,11 @@ class Obstacle(pygame.sprite.Sprite):
             self.rect.x -= s.scroll_speed
             if self.rect.right < 0:
                 self.kill()
-                s.score += 1
+                s.score += 0.5
+                if s.score > s.high_score:
+                    s.high_score = s.score
+                    s.new_high_score = True
+                    print(s.high_score)
                 s.point_sound.play()
 
     def update(self):

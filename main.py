@@ -29,11 +29,9 @@ while s.running:
             if event.key == pygame.K_SPACE:
                 s.is_jumping = True
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("work")
             mouse_pos = pygame.mouse.get_pos()
             print(s.playing)
             sl.set_screen_logic(mouse_pos)
-            print(s.playing)
         if event.type == s.spawn_obstacle and s.playing == True:
             bottom_height = random.randint(300,450)
             top_height = s.height-bottom_height-s.gap_height
@@ -49,7 +47,7 @@ while s.running:
         sl.draw_game_screen()
 
     if s.current_screen == s.PAUSE_SCREEN:
-        sl.draw_puase_screen()
+        sl.draw_pause_screen()
 
     if s.current_screen == s.GAME_OVER_SCREEN:
         sl.draw_game_over_screen()
