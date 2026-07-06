@@ -10,7 +10,7 @@ def draw_game_screen():
     s.player_group.draw(s.screen)
     s.obstacle_group.draw(s.screen)
     score_font = s.font.render(f"{int(s.score)}", False,(0,0,0))
-    if s.score == s.high_score and s.score != 0:
+    if s.new_high_score == True and s.score != 0:
         score_font = score_font = s.font.render(f"{int(s.score)}", False,(239,191,6))
     s.screen.blit(score_font, (s.width-250,s.height-750))
 
@@ -36,9 +36,12 @@ def draw_game_over_screen():
     high_score = s.font.render(f"High Score: {int(s.high_score)}", False,(0,0,0))
     if s.new_high_score == True:
         new_score = s.font.render("New High Score!",False,(239,191,6))
+        s.screen.blit(new_score,(s.width-450,s.height-280))
+    if s.score == s.high_score and s.new_high_score == False:
+        so_close = s.font.render("So Close!",False,(59, 67, 227))
+        s.screen.blit(so_close,(s.width-390,s.height-280))
     s.screen.blit(score,(s.width-430,s.height-380))
     s.screen.blit(high_score,(s.width-430,s.height-330))
-    s.screen.blit(new_score,(s.width-450,s.height-280))
     
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
@@ -53,6 +56,7 @@ def set_screen_logic(mousePos):
             s.obstacle_group.empty()
             s.score = 0
             s.flappy.reset()
+            s.new_high_score = False
             s.current_screen = s.GAME_SCREEN
         if s.quit_button.collidepoint(mousePos):
             s.running = False

@@ -26,6 +26,8 @@ while s.running:
                 s.playing = not s.playing
                 if s.playing == False:
                     s.current_screen = s.PAUSE_SCREEN
+                if s.current_screen != s.GAME_SCREEN:
+                    s.playing = False
             if event.key == pygame.K_SPACE:
                 s.is_jumping = True
         if event.type == pygame.MOUSEBUTTONDOWN:
