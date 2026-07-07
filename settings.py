@@ -20,6 +20,7 @@ playing = False
 GAME_SCREEN = "game screen"
 PAUSE_SCREEN = "pause screen"
 GAME_OVER_SCREEN = "game over"
+SIGN_IN_SCREEN = "sign in"
 current_screen = GAME_SCREEN
 player_group = pygame.sprite.Group()
 obstacle_group = pygame.sprite.Group()
