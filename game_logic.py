@@ -1,4 +1,3 @@
-import pygame
 import settings as s
 
 #ground scroll -->

@@ -9,6 +9,7 @@ import obstacle as o
 import random
 
 s.screen = pygame.display.set_mode((s.width,s.height))
+pygame.display.set_caption("Flappy bird")
 s.bg = pygame.image.load(s.background_img)
 s.bg = pygame.transform.scale(s.bg,(s.width,s.height))
 s.ground = pygame.image.load(s.ground_img)
@@ -30,6 +31,11 @@ while s.running:
                     s.playing = False
             if event.key == pygame.K_SPACE:
                 s.is_jumping = True
+            if s.active_input == "usernamebox":
+                if event.key == pygame.K_BACKSPACE:
+                    s.username_text = s.username_text[:len(s.username_text)-1]
+                else:
+                    s.username_text += event.unicode
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
             print(s.playing)
@@ -53,6 +59,9 @@ while s.running:
 
     if s.current_screen == s.GAME_OVER_SCREEN:
         sl.draw_game_over_screen()
+
+    if s.current_screen == s.SIGN_UP_SCREEN:
+        sl.draw_signup_screen()
 
     if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask) and s.playing == True:
         s.playing = False
