@@ -73,3 +73,4 @@ score_board = pygame.Rect(width-450,height-400,400,180)
 new_high_score = False
 active_input = None
 rendered_text = font_2.render("",True,"black")
+account_created = None

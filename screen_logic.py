@@ -1,11 +1,11 @@
 import pygame
 import settings as s
+import authenticate as a
 
 def draw_button(rectButton,color):
     pygame.draw.rect(s.screen,color,rectButton)
 
 def drawInput(rect,text,active):
-    print(active)
     color = "Black" if active == False else (182,150,18)
     pygame.draw.rect(s.screen,color,rect)
     s.rendered_text = s.font_2.render(text,False,"white")
@@ -62,6 +62,12 @@ def draw_signup_screen():
     drawInput(s.password_box,s.password_text,s.active_input == "passwordbox")
     draw_button(s.sign_up_button,"black")
     s.screen.blit(s.sign_up_btn_img,(s.width-350,s.height-400))
+    if s.account_created == True:
+        created = s.font_2.render("Account created successfully",True,"red")
+        s.screen.blit(created,(s.width-370,s.height-300))
+    elif s.account_created == False:
+        usernameWarning = s.font_2.render("User name already exists",True,"red")
+        s.screen.blit(usernameWarning,(s.width-360,s.height-300))
     
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
@@ -85,3 +91,5 @@ def set_screen_logic(mousePos):
             s.active_input = "usernamebox"
         if s.password_box.collidepoint(mousePos):
             s.active_input = "passwordbox"
+        if s.sign_up_button.collidepoint(mousePos):
+            a.sign_up(s.username_text,s.password_text)

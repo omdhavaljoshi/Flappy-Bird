@@ -36,9 +36,13 @@ while s.running:
                     s.username_text = s.username_text[:len(s.username_text)-1]
                 else:
                     s.username_text += event.unicode
+            if s.active_input == "passwordbox":
+                if event.key == pygame.K_BACKSPACE:
+                    s.password_text = s.password_text[:len(s.password_text)-1]
+                else:
+                    s.password_text += event.unicode
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            print(s.playing)
             sl.set_screen_logic(mouse_pos)
         if event.type == s.spawn_obstacle and s.playing == True:
             bottom_height = random.randint(300,450)
