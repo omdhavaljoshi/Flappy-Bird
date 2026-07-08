@@ -68,6 +68,15 @@ def draw_signup_screen():
     elif s.account_created == False:
         usernameWarning = s.font_2.render("User name already exists",True,"red")
         s.screen.blit(usernameWarning,(s.width-360,s.height-300))
+
+def draw_auth_screen():
+    s.screen.fill(s.bg_colour)
+    title = s.font.render("Flappy Bird", True, "black")
+    s.screen.blit(title,(s.width-390,s.height-700))
+    draw_button(s.sign_in_button,"black")
+    s.screen.blit(s.sign_in_btn_img,(s.width-350,s.height-600))
+    draw_button(s.sign_up_button2,"black")
+    s.screen.blit(s.sign_up_btn_img,(s.width-350,s.height-500))
     
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
@@ -93,3 +102,8 @@ def set_screen_logic(mousePos):
             s.active_input = "passwordbox"
         if s.sign_up_button.collidepoint(mousePos):
             a.sign_up(s.username_text,s.password_text)
+    if s.current_screen == s.AUTH_SCREEN:
+        if s.sign_in_button.collidepoint(mousePos):
+            s.current_screen = s.SIGN_IN_SCREEN
+        if s.sign_up_button2.collidepoint(mousePos):
+            s.current_screen = s.SIGN_UP_SCREEN
