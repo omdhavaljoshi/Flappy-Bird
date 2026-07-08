@@ -70,6 +70,9 @@ while s.running:
     if s.current_screen == s.AUTH_SCREEN:
         sl.draw_auth_screen()
 
+    if s.current_screen == s.SIGN_IN_SCREEN:
+        sl.draw_signin_screen()
+
     if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask) and s.playing == True:
         s.playing = False
         s.hit_sound.play()

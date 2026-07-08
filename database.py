@@ -20,4 +20,5 @@ CREATE TABLE IF NOT EXISTS flappy_birdLogin(
 
 def save_high_score(current_user):
     cursor.execute("""UPDATE flappy_birdScore SET high_score = ? WHERE user_id = ?""",(s.high_score,current_user))
+    print(f"high score saved for {current_user}:{s.high_score}")
     connection.commit()

@@ -1,6 +1,7 @@
 import pygame
 import settings as s
 import authenticate as a
+import database as db
 
 def draw_button(rectButton,color):
     pygame.draw.rect(s.screen,color,rectButton)
@@ -44,6 +45,7 @@ def draw_game_over_screen():
     if s.new_high_score == True:
         new_score = s.font.render("New High Score!",False,(182,150,18))
         s.screen.blit(new_score,(s.width-450,s.height-280))
+        db.save_high_score(s.current_user)
     if s.score == s.high_score and s.new_high_score == False:
         so_close = s.font.render("So Close!",False,(59, 67, 227))
         s.screen.blit(so_close,(s.width-370,s.height-280))
@@ -68,6 +70,25 @@ def draw_signup_screen():
     elif s.account_created == False:
         usernameWarning = s.font_2.render("User name already exists",True,"red")
         s.screen.blit(usernameWarning,(s.width-360,s.height-300))
+
+def draw_signin_screen():
+    s.screen.fill(s.bg_colour)
+    title = s.font.render("Sign In", True, "black")
+    s.screen.blit(title,(s.width-350,s.height-700))
+    user_nameTitle = s.font_2.render("Username:", True,"Black")
+    s.screen.blit(user_nameTitle,(40,s.height-600))
+    drawInput(s.username_box,s.username_text,s.active_input == "usernamebox")
+    passwordTitle = s.font_2.render("Password:", True,"Black")
+    s.screen.blit(passwordTitle,(40,s.height-500))
+    drawInput(s.password_box,s.password_text,s.active_input == "passwordbox")
+    draw_button(s.sign_in_button2,"black")
+    s.screen.blit(s.sign_in_btn_img,(s.width-350,s.height-400))
+    if s.sign_in_successful == True:
+        signed_in = s.font_2.render("Sign in sucessful",True,"red")
+        s.screen.blit(signed_in,(s.width-370,s.height-300))
+    elif s.sign_in_successful == False:
+        usernameWarning = s.font_2.render("Username or password is incorrect",True,"red")
+        s.screen.blit(usernameWarning,(s.width-450,s.height-300))
 
 def draw_auth_screen():
     s.screen.fill(s.bg_colour)
@@ -102,8 +123,19 @@ def set_screen_logic(mousePos):
             s.active_input = "passwordbox"
         if s.sign_up_button.collidepoint(mousePos):
             a.sign_up(s.username_text,s.password_text)
+            s.username_text = ""
+            s.password_text = ""
     if s.current_screen == s.AUTH_SCREEN:
         if s.sign_in_button.collidepoint(mousePos):
             s.current_screen = s.SIGN_IN_SCREEN
         if s.sign_up_button2.collidepoint(mousePos):
             s.current_screen = s.SIGN_UP_SCREEN
+    if s.current_screen == s.SIGN_IN_SCREEN:
+        if s.username_box.collidepoint(mousePos):
+            s.active_input = "usernamebox"
+        if s.password_box.collidepoint(mousePos):
+            s.active_input = "passwordbox"
+        if s.sign_in_button2.collidepoint(mousePos):
+            a.sign_in(s.username_text,s.password_text)
+            s.username_text = ""
+            s.password_text = ""
