@@ -1,6 +1,5 @@
 import settings as s
 import database as db
-import time
 
 def sign_up(username,password):
     db.cursor.execute("""SELECT user_id FROM flappy_birdLogin""")
@@ -20,7 +19,7 @@ def sign_up(username,password):
 def sign_in(username,password):
     db.cursor.execute("""SELECT * FROM flappy_birdLogin WHERE password = ? AND user_id = ?""",(password,username))
     accounts = db.cursor.fetchall()
-    if len(accounts) != 0:
+    if len(accounts) > 0:
         s.current_user = username
         print("successfully signed in")
         s.sign_in_successful = True
@@ -30,6 +29,20 @@ def sign_in(username,password):
         list_score = list(score[0])
         s.high_score = list_score.pop(0)
         print(s.high_score)
+        # db.cursor.execute("""UPDATE latest_user set user_id = ?""", (s.current_user,))
+        # db.cursor.execute("""SELECT * FROM latest_user""")
+        # user = db.cursor.fetchall()
+        # print(user)
+        # print(s.current_user)
     else:
         s.sign_in_successful = False
         print("username or password is incorrect")
+
+def sign_out():
+    s.current_user = None
+    s.current_screen = s.AUTH_SCREEN
+    s.flappy.reset()
+    s.username_text = ""
+    s.password_text = ""
+    s.active_input = None
+    # db.cursor.execute("""UPDATE latest_user set user_id = ?""", ("",))

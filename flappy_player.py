@@ -51,6 +51,10 @@ class Flappy(pygame.sprite.Sprite):
         s.flappy.rect.x = s.width-400
         s.flappy.rect.y = s.height-600
         self.angle = 0
+        original_image = self.bird_images[self.index]
+        centerX,centerY = self.rect.center
+        self.image = pygame.transform.rotate(original_image,self.angle)
+        self.rect = self.image.get_rect(center = (centerX,centerY))
         self.velocity = 0
         
     def update(self):

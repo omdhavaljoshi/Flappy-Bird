@@ -51,6 +51,8 @@ def draw_game_over_screen():
         s.screen.blit(so_close,(s.width-370,s.height-280))
     s.screen.blit(score,(s.width-430,s.height-380))
     s.screen.blit(high_score,(s.width-430,s.height-330))
+    draw_button(s.sign_out_button,"black")
+    s.screen.blit(s.sign_out_btn_img,(s.width-350,s.height-200))
 
 def draw_signup_screen():
     s.screen.fill(s.bg_colour)
@@ -116,6 +118,8 @@ def set_screen_logic(mousePos):
             s.current_screen = s.GAME_SCREEN
         if s.quit_button.collidepoint(mousePos):
             s.running = False
+        if s.sign_out_button.collidepoint(mousePos):
+            a.sign_out()
     if s.current_screen == s.SIGN_UP_SCREEN:
         if s.username_box.collidepoint(mousePos):
             s.active_input = "usernamebox"
