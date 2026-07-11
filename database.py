@@ -18,14 +18,15 @@ CREATE TABLE IF NOT EXISTS flappy_birdLogin(
                 password TEXT)
 """)
 
-# cursor.execute("""
-# CREATE TABLE IF NOT EXISTS latest_user(
-#                 user_id TEXT)
-# """)
-# cursor.execute("""SELECT user_id FROM latest_user""")
-# last_user = cursor.fetchall()
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS latest_user(
+                user_id TEXT)
+""")
+cursor.execute("""SELECT user_id FROM latest_user""")
+last_user = cursor.fetchone()
+# print(last_user)
 # if len(last_user) == 0:
-#     cursor.execute("""INSERT INTO latest_user(user_id) VALUES(?)""", (None,))
+#     cursor.execute("""INSERT INTO latest_user(user_id) VALUES(?)""", ("",))
 
 def save_high_score(current_user):
     cursor.execute("""UPDATE flappy_birdScore SET high_score = ? WHERE user_id = ?""",(s.high_score,current_user))
@@ -35,8 +36,10 @@ def save_high_score(current_user):
 def latest_user():
     cursor.execute("""SELECT user_id FROM latest_user""")
     user = cursor.fetchone()
-    print(user)
-    if user[0][0] == None:
+    # print(user)
+    if user is None:
+        # print("test")
         return None
     else:
-        return user[0][0]
+        # print(user)
+        return user[0]

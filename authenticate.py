@@ -19,21 +19,22 @@ def sign_up(username,password):
 def sign_in(username,password):
     db.cursor.execute("""SELECT * FROM flappy_birdLogin WHERE password = ? AND user_id = ?""",(password,username))
     accounts = db.cursor.fetchall()
+    print(accounts)
     if len(accounts) > 0:
         s.current_user = username
         print("successfully signed in")
         s.sign_in_successful = True
         s.current_screen = s.GAME_SCREEN
-        db.cursor.execute("""SELECT high_score FROM flappy_birdScore WHERE user_id = ?""",(username,))
-        score = db.cursor.fetchall()
-        list_score = list(score[0])
-        s.high_score = list_score.pop(0)
+        db.cursor.execute("""SELECT high_score FROM flappy_birdScore WHERE user_id = ?""",(s.current_user,))
+        score = db.cursor.fetchone()
+        s.high_score = score[0]
         print(s.high_score)
-        # db.cursor.execute("""UPDATE latest_user set user_id = ?""", (s.current_user,))
+        db.cursor.execute("""INSERT INTO latest_user(user_id) VALUES(?)""", (s.current_user,))
         # db.cursor.execute("""SELECT * FROM latest_user""")
         # user = db.cursor.fetchall()
         # print(user)
-        # print(s.current_user)
+        print(s.current_user)
+        db.connection.commit()
     else:
         s.sign_in_successful = False
         print("username or password is incorrect")
@@ -45,4 +46,8 @@ def sign_out():
     s.username_text = ""
     s.password_text = ""
     s.active_input = None
-    # db.cursor.execute("""UPDATE latest_user set user_id = ?""", ("",))
+    db.cursor.execute("""DELETE FROM latest_user""")
+    db.connection.commit()
+
+# sign_out()
+# sign_in("Om","12345")

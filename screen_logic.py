@@ -93,13 +93,20 @@ def draw_signin_screen():
         s.screen.blit(usernameWarning,(s.width-450,s.height-300))
 
 def draw_auth_screen():
-    s.screen.fill(s.bg_colour)
-    title = s.font.render("Flappy Bird", True, "black")
-    s.screen.blit(title,(s.width-390,s.height-700))
-    draw_button(s.sign_in_button,"black")
-    s.screen.blit(s.sign_in_btn_img,(s.width-350,s.height-600))
-    draw_button(s.sign_up_button2,"black")
-    s.screen.blit(s.sign_up_btn_img,(s.width-350,s.height-500))
+    user = db.latest_user()
+    print(user)
+    if user is not None:
+        db.cursor.execute("""SELECT password FROM flappy_birdLogin WHERE user_id = ?""",(user,))
+        password = db.cursor.fetchone()
+        a.sign_in(user,password[0])
+    else:
+        s.screen.fill(s.bg_colour)
+        title = s.font.render("Flappy Bird", True, "black")
+        s.screen.blit(title,(s.width-390,s.height-700))
+        draw_button(s.sign_in_button,"black")
+        s.screen.blit(s.sign_in_btn_img,(s.width-350,s.height-600))
+        draw_button(s.sign_up_button2,"black")
+        s.screen.blit(s.sign_up_btn_img,(s.width-350,s.height-500))
     
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
