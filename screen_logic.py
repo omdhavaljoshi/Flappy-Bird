@@ -30,6 +30,8 @@ def draw_pause_screen():
     s.screen.blit(s.quit_btn_img,(s.width-350,s.height-500))
     title = s.font.render("Game Paused", True, "Black")
     s.screen.blit(title,(s.width-400,s.height-700))
+    draw_button(s.menu_button2,"black")
+    s.screen.blit(s.menu_btn_img,(s.width-350,s.height-400))
 
 def draw_game_over_screen():
     s.screen.fill(s.bg_colour)
@@ -53,6 +55,8 @@ def draw_game_over_screen():
     s.screen.blit(high_score,(s.width-430,s.height-330))
     draw_button(s.sign_out_button,"black")
     s.screen.blit(s.sign_out_btn_img,(s.width-350,s.height-200))
+    draw_button(s.menu_button,"black")
+    s.screen.blit(s.menu_btn_img,(s.width-350,s.height-100))
 
 def draw_signup_screen():
     s.screen.fill(s.bg_colour)
@@ -107,6 +111,19 @@ def draw_auth_screen():
         s.screen.blit(s.sign_in_btn_img,(s.width-350,s.height-600))
         draw_button(s.sign_up_button2,"black")
         s.screen.blit(s.sign_up_btn_img,(s.width-350,s.height-500))
+
+def draw_menu_screen():
+    s.screen.fill(s.bg_colour)
+    title = s.font.render(f"{s.current_user}'s Menu", True, "black")
+    text_width = title.get_width()
+    side_gap = (s.width-text_width)/2
+    s.screen.blit(title,(s.width-(s.width-side_gap),s.height-700))
+    draw_button(s.play_button,"black")
+    s.screen.blit(s.play_btn_img,(s.width-350,s.height-600))
+    draw_button(s.sign_out_button2,"black")
+    s.screen.blit(s.sign_out_btn_img,(s.width-350,s.height-500))
+    draw_button(s.difficulty_button,"black")
+    s.screen.blit(s.difficulty_btn_img,(s.width-350,s.height-400))
     
 def set_screen_logic(mousePos):
     if s.current_screen == s.PAUSE_SCREEN:
@@ -115,6 +132,8 @@ def set_screen_logic(mousePos):
             s.current_screen = s.GAME_SCREEN
         if s.quit_button.collidepoint(mousePos):
             s.running = False
+        if s.menu_button2.collidepoint(mousePos):
+            s.current_screen = s.MENU_SCREEN
     if s.current_screen == s.GAME_OVER_SCREEN:
         if s.restart_button.collidepoint(mousePos):
             s.playing = False
@@ -127,6 +146,8 @@ def set_screen_logic(mousePos):
             s.running = False
         if s.sign_out_button.collidepoint(mousePos):
             a.sign_out()
+        if s.menu_button.collidepoint(mousePos):
+            s.current_screen = s.MENU_SCREEN
     if s.current_screen == s.SIGN_UP_SCREEN:
         if s.username_box.collidepoint(mousePos):
             s.active_input = "usernamebox"
@@ -150,3 +171,14 @@ def set_screen_logic(mousePos):
             a.sign_in(s.username_text,s.password_text)
             s.username_text = ""
             s.password_text = ""
+    if s.current_screen == s.MENU_SCREEN:
+        if s.sign_out_button2.collidepoint(mousePos):
+            a.sign_out()
+        if s.play_button.collidepoint(mousePos):
+            s.current_screen = s.GAME_SCREEN
+            s.playing = False
+            s.obstacle_group.empty()
+            s.score = 0
+            s.flappy.reset()
+            s.new_high_score = False
+            s.current_screen = s.GAME_SCREEN

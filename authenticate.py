@@ -24,7 +24,7 @@ def sign_in(username,password):
         s.current_user = username
         print("successfully signed in")
         s.sign_in_successful = True
-        s.current_screen = s.GAME_SCREEN
+        s.current_screen = s.MENU_SCREEN
         db.cursor.execute("""SELECT high_score FROM flappy_birdScore WHERE user_id = ?""",(s.current_user,))
         score = db.cursor.fetchone()
         s.high_score = score[0]

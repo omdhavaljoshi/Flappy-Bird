@@ -72,6 +72,9 @@ while s.running:
 
     if s.current_screen == s.SIGN_IN_SCREEN:
         sl.draw_signin_screen()
+    
+    if s.current_screen == s.MENU_SCREEN:
+        sl.draw_menu_screen()
 
     if pygame.sprite.spritecollide(s.flappy,s.obstacle_group,False,pygame.sprite.collide_mask) and s.playing == True:
         s.playing = False
